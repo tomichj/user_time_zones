@@ -3,7 +3,7 @@ module UserTimeZones
     extend ActiveSupport::Concern
 
     included do
-      around_filter :user_time_zone, if: :current_user
+      around_action :user_time_zone, if: :current_user
     end
 
     protected

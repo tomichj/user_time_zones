@@ -33,7 +33,7 @@ module UserTimeZones
 
       def inject_into_user_model
         if File.exist? model_path
-          inject_into_class(model_path, model_class_name, "  include UserTimeZone::User\n\n")
+          inject_into_class(model_path, model_class_name, "  include UserTimeZones::User\n\n")
         end
       end
 
@@ -41,7 +41,7 @@ module UserTimeZones
         inject_into_class(
           'app/controllers/application_controller.rb',
           ApplicationController,
-          "  include UserTimeZone::Controller\n\n"
+          "  include UserTimeZones::Controller\n\n"
         )
       end
 

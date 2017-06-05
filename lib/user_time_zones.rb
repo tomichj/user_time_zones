@@ -1,5 +1,8 @@
 require 'user_time_zones/version'
+require 'user_time_zones/helper'
+require 'user_time_zones/user'
+require 'user_time_zones/controller'
 
 module UserTimeZones
-  # Your code goes here...
 end
+
