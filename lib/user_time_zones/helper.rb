@@ -3,7 +3,7 @@ module ActionView
 
     module FormHelper
       def guess_tz_offset_field(object_name, options = {})
-        time_zone_javascript
+        time_zone_javascript()
         method = :time_zone_offset
         options['data-behavior'] = 'guess-time-zone-offset'
         hidden_field(object_name, method, options)
@@ -19,15 +19,18 @@ module ActionView
 
     private
 
-    def time_zone_javascript(on = 'ready page:update turbolinks:load')
+    def time_zone_javascript(event_on = 'turbolinks:load')
       puts 'doing javascript timze zone'
       javascript_tag(<<-EOS
-$(document).on("#{on}", function() {
-    if ($("[data-behavior~=guess-time-zone-offset]").length > 0) {
-      var offset = -(new Date().getTimezoneOffset() / 60)
-      $("[data-behavior~=guess-time-zone-offset]").val(offset)
-    }
-});
+function guessTimeZoneOffset() {
+  var offset = -(new Date().getTimezoneOffset() / 60);
+  var field = document.querySelector("[data-behavior~=guess-time-zone-offset]");
+  if (field) {
+    field.value = offset;
+  }
+}
+
+document.addEventListener("#{event_on}", guessTimeZoneOffset);
 EOS
       )
     end
