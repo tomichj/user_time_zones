@@ -14,12 +14,13 @@ module UserTimeZones
     #
     def time_zone_offset=(time_zone_offset)
       offset = "#{time_zone_offset}".to_i
-      time_zone = ActiveSupport::TimeZone[offset].name
+      self.time_zone = ActiveSupport::TimeZone[offset].name
     end
 
     def time_zone_offset
-      # return nil if time_zone.nil?
-      nil
+      return nil if time_zone.nil?
+      @tz ||= Time.find_zone! time_zone
+      @tz.utc_offset / 3600 unless @tz.nil? || @tz.utc_offset.nil?
     end
 
   end
