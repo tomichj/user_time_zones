@@ -1,39 +1,63 @@
 # UserTimeZones
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/user_time_zones`. To experiment with that code, run `bin/console` for an interactive prompt.
+UserTimeZones provides an easy way for each user of your application to have a time zone.
 
-TODO: Delete this and the text above, and describe your gem
+
+## Requirements
+
+* a user model (typically `User`, but any class name is supported)
+* a `current_user` helper
+
 
 ## Installation
 
-Add this line to your application's Gemfile:
+To get started, add Authenticate to your `Gemfile` and run `bundle install` to install it:
+
 
 ```ruby
 gem 'user_time_zones'
 ```
 
-And then execute:
+Then run the install generator:
 
-    $ bundle
+```sh
+rails generate user_time_zones:install
+```
 
-Or install it yourself as:
+Then apply the migration the generator created:
 
-    $ gem install user_time_zones
+```sh
+rails db:migrate
+```
+
+The install generator does the following:
+ 
+* Create a migration, adding a `time_zone` column to your user.
+* Insert `include UserTimeZones::User` into your `User` model.
+* Insert `include UserTimeZones::Controller` into your `ApplicationController`.
+
+You may optionally include the javascript to guess a new user's timezone in your `application.js`:
+```javascript
+//= require user_time_zones
+```
+
 
 ## Usage
 
-TODO: Write usage instructions here
+To set a new user's time zone initially, include
 
-## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/user_time_zones. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+[Bug reports] and [pull requests] are welcome on GitHub at https://github.com/tomichj/user_time_zones. 
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to 
+adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+You can contact me directly via twitter at [@JustinTomich](https://twitter.com/justintomich).
+
+[Bug reports]: https://github.com/tomichj/authenticate/issues
+[pull requests]: https://github.com/tomichj/user_time_zones/pulls
 
 ## License
 

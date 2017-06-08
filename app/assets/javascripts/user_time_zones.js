@@ -1,25 +1,35 @@
 // Mutator, watches for an element with [data-behavior~=guess-time-zone-offset].
-// Adds best guess timezone to that element.
-//
-// Element can be created using
+// Sets best guess at timezone to that element.
+var MutationObserver, observe, observer, guessTimeZoneOffset, selector;
 
-var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+observer = void 0;
+selector = "[data-behavior~=guess-time-zone-offset]";
 
-function guessTimeZoneOffset(time_zone_offset_field) {
-  if (time_zone_offset_field) {
-    time_zone_offset_field.value = -(new Date().getTimezoneOffset() / 60);
+guessTimeZoneOffset = function(field) {
+  if (field) {
+    field.value = -(new Date().getTimezoneOffset() / 60);
   }
-}
+};
 
-var observer = new MutationObserver(function() {
-  console.log("creating new time zone offset mutation observer")
-  var field = window.document.querySelector("[data-behavior~=guess-time-zone-offset]");
-  guessTimeZoneOffset(field);
-});
+observe = function() {
+  if (!observer) {
+    observer = new MutationObserver(check);
+    observer.observe(window.document.documentElement, {childList: true, subtree: true});
+  }
+  check();
+};
 
-observer.observe(window.document.documentElement, {
-  childList: true,
-  subtree: true,
-  attributes: false,
-  characterData: false
-});
+check = function() {
+  var element, elements;
+  elements = window.document.querySelectorAll(selector);
+  for (var i = 0; i < elements.length; i++) {
+    element = elements[i];
+    if (!element.ready) {
+      element.ready = true;
+      guessTimeZoneOffset.call(element, element);
+    }
+  }
+};
+
+(function() { return observe(); })();
