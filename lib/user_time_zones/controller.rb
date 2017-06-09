@@ -10,9 +10,8 @@ module UserTimeZones
 
     # Use this time zone for the duration of this controller action
     def user_time_zone(&block)
-      if current_user&.time_zone
-        Time.use_zone(current_user.time_zone, &block)
-      end
+      Time.use_zone(current_user.time_zone, &block) unless current_user.time_zone.nil?
     end
+
   end
 end
