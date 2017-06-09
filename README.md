@@ -38,7 +38,8 @@ You may optionally include the javascript to guess a new user's timezone in your
 //= require user_time_zones
 ```
 
-### Different user model?
+
+##### Different user model?
 
 To specify an alternate user model (something other than `User`), use the --model flag. For example, if your user model
 is named `Profile`:
