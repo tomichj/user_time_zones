@@ -8,5 +8,18 @@
 /spec/reports/
 /tmp/
 
+log/*.log
+
+/spec/dummy/db/*.sqlite3
+/spec/dummy/db/*.sqlite3-journal
+/spec/dummy/log/*.log
+/spec/dummy/tmp/
+/spec/dummy/log/test.log
+/spec/dummy/log/development.log
+/.idea
+
+user_time_zones-*.gem
+*.gemfile.lock
+
 # rspec failure tracking
 .rspec_status
