@@ -8,14 +8,6 @@
 </head>
 <body>
 
-<div id="header">
-  <% if logged_in? -%>
-      <%= link_to t(".sign_out"), sign_out_path %>
-  <% else -%>
-      <%= link_to t(".sign_in"), sign_in_path %>
-  <% end -%>
-</div>
-
 <div id="flash">
   <% flash.each do |key, value| -%>
       <div id="flash_<%= key %>"><%=h value %></div>

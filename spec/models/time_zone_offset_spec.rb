@@ -16,14 +16,17 @@ describe UserTimeZones::User do
 
     it 'translates offset to time zone' do
       @user.time_zone_offset = -8
-      puts @user.time_zone
       expect(@user.time_zone).to eq 'Pacific Time (US & Canada)'
     end
 
-    it 'validates time zone' do
-      @user.time_zone = 'not a time zone'
-      @user.valid?
-      expect(@user.errors[:time_zone]).to include('not included')
+    it 'defaults time zone to UTC' do
+      expect(@user.time_zone_offset).to eq 0
+    end
+
+    it 'time_zone_offset can be updated' do
+      @user.time_zone_offset = -10
+      @user.time_zone_offset = -8
+      expect(@user.time_zone).to eq 'Pacific Time (US & Canada)'
     end
   end
 

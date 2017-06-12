@@ -5,7 +5,7 @@ module UserTimeZones
     extend ActiveSupport::Concern
 
     included do
-      validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.all.map{ |tz| tz.tzinfo.name }
+      validates_inclusion_of :time_zone, in: ActiveSupport::TimeZone.all.map{ |tz| tz.name }
     end
 
     #
@@ -19,8 +19,8 @@ module UserTimeZones
 
     def time_zone_offset
       return nil if time_zone.nil?
-      @tz ||= Time.find_zone! time_zone
-      @tz.utc_offset / 3600 unless @tz.nil? || @tz.utc_offset.nil?
+      tz ||= Time.find_zone! time_zone
+      tz.utc_offset / 3600 unless (tz.nil? || tz.utc_offset.nil?)
     end
 
   end

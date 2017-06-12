@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'sqlite3', '~> 1.3'
   spec.add_development_dependency 'capybara'
   spec.add_development_dependency 'factory_girl'
-  spec.add_development_dependency 'authenticate'
+  spec.add_development_dependency 'timecop'
 
   spec.required_ruby_version = Gem::Requirement.new('>= 2.0')
 end

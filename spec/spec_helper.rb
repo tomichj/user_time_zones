@@ -1,15 +1,3 @@
-# require "bundler/setup"
-# require "user_time_zones"
-#
-# RSpec.configure do |config|
-#   # Enable flags like --only-failures and --next-failure
-#   config.example_status_persistence_file_path = ".rspec_status"
-#
-#   config.expect_with :rspec do |c|
-#     c.syntax = :expect
-#   end
-# end
-
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 ENV['RAILS_ENV'] ||= 'test'
 
@@ -21,7 +9,7 @@ require 'capybara/rails'
 require 'capybara/rspec'
 # require 'database_cleaner'
 require 'factory_girl'
-# require 'timecop'
+require 'timecop'
 # require 'support/mailer'
 
 Rails.backtrace_cleaner.remove_silencers!
@@ -52,3 +40,6 @@ RSpec.configure do |config|
   end
 end
 
+def login_user(user = create(:user, :pacific_time_zone))
+  allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+end
