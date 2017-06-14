@@ -92,8 +92,11 @@ You can allow the user to edit their time zone later on, in user#edit or elsewhe
 
 ### Applying the user's time zone
 
-For each action a user takes, UserTimeZones will set the time zone to a user's `:time_zone` . 
-This is done in `ApplcationController` with an `around_action` that calls `Time.use_zone`.
+The `UserTimeZones::Controller` module provides an `around_action` that wraps each action a user takes, setting
+the time zone to the user's `time_zone` attribute for the duration of the controller action.
+
+`UserTimeZones::Controller` was inserted into your `ApplicationController` by the UserTimeZone's install generator.
+ Any controller that needs time zone support should have `include UserTimeZones::Controller`. 
 
 
 ### The User model and time zones
@@ -113,6 +116,9 @@ Example:
 >> user.time_zone_offset
 => -9
 ```
+
+Your user model must `include UserTimeZones::User` into your user model. This is done automatically by UserTimeZone's
+install generator.
 
 
 ### A summary of do’s and don'ts with time zones
