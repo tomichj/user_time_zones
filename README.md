@@ -1,6 +1,6 @@
 # UserTimeZones
 
-UserTimeZones provides an easyway to work with multiple user time zones.
+UserTimeZones provides an easy way to work with multiple user time zones.
 
 UserTimeZones is intended to be small, simple, and well-tested. A large percentage of applications will require
 support for per-user time zones which this gem can assist with. The solution is simple; you could implement it 
