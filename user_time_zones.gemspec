@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.extra_rdoc_files = %w(LICENSE README.md CHANGELOG.md)
+  spec.extra_rdoc_files = %w(LICENSE.txt README.md CHANGELOG.md)
   spec.rdoc_options = ['--charset=UTF-8']
 
   # probably reduce to railtie or ...
