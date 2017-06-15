@@ -12,10 +12,10 @@ to expend much effort.
 
 ## Overview
 
-Your `User` model gets a `time_zone` attribute to record the `ActiveSupport::TimeZone` for that user. `User` also gets
-methods to set/get the time zone as an offset from `UTC`. Every controller action is executed in the context of the 
-user's time zone. And, finally, some javascript will help you initially calculate the user's time zone when they
-sign up.
+Your `User` model gets a `time_zone` attribute to record the `ActiveSupport::TimeZone` for each user, and
+methods to set/get the time zone as an offset (in hours) from `UTC`. Every controller action is executed in 
+the context of the user's time zone. And, finally, some javascript will help you initially calculate the 
+user's time zone when they sign up.
 
 
 ## Requirements
@@ -26,14 +26,10 @@ sign up.
 
 ## Install
 
-To get started, add the gem to your `Gemfile`:
+To get started, add the gem to your `Gemfile` and run `bundle install` to install it:
 
 ```ruby
 gem 'user_time_zones'
-```
-
-```sh
-bundle install
 ```
 
 Run the install generator:
@@ -51,7 +47,7 @@ The install generator will:
 * Insert `include UserTimeZones::User` into your `User` model.
 * Insert `include UserTimeZones::Controller` into your `ApplicationController`.
 
-Optional: include the javascript to calculate a new user's timezone in your `application.js`:
+Include the javascript to calculate a new user's timezone in your `application.js`:
 ```javascript
 //= require user_time_zones
 ```
