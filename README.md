@@ -7,6 +7,8 @@ support for per-user time zones; this gem can help. The solution is simple, you 
 yourself, but this library will let you implement the solution the same way, every time, without having 
 to expend much effort.
 
+[![Gem Version](https://badge.fury.io/rb/user_time_zones.svg)](https://badge.fury.io/rb/user_time_zones) ![Build status](https://travis-ci.org/tomichj/user_time_zones.svg?branch=master) ![Code Climate](https://codeclimate.com/github/tomichj/user_time_zones/badges/gpa.svg)
+
 ## Overview
 
 Your `User` model gets a `time_zone` attribute to record the `ActiveSupport::TimeZone` for that user. `User` also gets
