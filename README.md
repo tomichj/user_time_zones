@@ -2,10 +2,18 @@
 
 UserTimeZones provides an easy way to work with multiple user time zones.
 
-UserTimeZones is intended to be small, simple, and well-tested. A large percentage of applications will require
-support for per-user time zones which this gem can assist with. The solution is simple; you could implement it 
+UserTimeZones is small, simple, and tested. A large percentage of applications will require
+support for per-user time zones; this gem can help. The solution is simple, you could implement it 
 yourself, but this library will let you implement the solution the same way, every time, without having 
-to expend excess effort. 
+to expend much effort.
+
+## Overview
+
+Your `User` model gets a `time_zone` attribute to record the `ActiveSupport::TimeZone` for that user. `User` also gets
+methods to set/get the time zone as an offset from `UTC`. Every controller action is executed in the context of the 
+user's time zone. And, finally, some javascript will help you initially calculate the user's time zone when they
+sign up.
+
 
 ## Requirements
 
@@ -15,10 +23,14 @@ to expend excess effort.
 
 ## Install
 
-To get started, add the UserTimeZones gem to your `Gemfile` and run `bundle install` to install it:
+To get started, add the gem to your `Gemfile`:
 
 ```ruby
 gem 'user_time_zones'
+```
+
+```sh
+bundle install
 ```
 
 Run the install generator:
@@ -36,7 +48,7 @@ The install generator will:
 * Insert `include UserTimeZones::User` into your `User` model.
 * Insert `include UserTimeZones::Controller` into your `ApplicationController`.
 
-You may optionally include the javascript to guess a new user's timezone in your `application.js`:
+Optional: include the javascript to calculate a new user's timezone in your `application.js`:
 ```javascript
 //= require user_time_zones
 ```
@@ -103,7 +115,7 @@ the time zone to the user's `time_zone` attribute for the duration of the contro
 
 UserTimeZones gives the user a new attribute, `time_zone`, and new methods `time_zone_offset` and `time_zone_offset=`. 
 The `time_zone` user attribute is the name of a `ActiveSupport::TimeZone`. The offset methods are the offset of 
-the time zone from `UTC`, in hours.
+that time zone from `UTC`, in hours. Setting the `time_zone_offset` to a new value will change the user's `time_zone`.
 
 Example:
 ```ruby
@@ -115,10 +127,33 @@ Example:
 => "Alaska"
 >> user.time_zone_offset
 => -9
+>> user.time_zone_offset = -7
+=> -7
+>> user.time_zone
+=> "Arizona"
 ```
 
-Your user model must `include UserTimeZones::User` into your user model. This is done automatically by UserTimeZone's
+Your user model must `include UserTimeZones::User` into your user model. This is done for you by UserTimeZone's
 install generator.
+
+### Selecting a time zone
+
+Typically a user is allowed to manually select their time zone in a `user#edit` action. Nothing special here,
+just use the Rails form helper time_zone_select. For example:
+```erbruby
+<%= form_for @user do |f| %>
+    <!-- ... -->
+    <%= f.label :time_zone, 'Time Zone' %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all %>
+    <!-- ... -->
+<% end %>
+```
+
+You can limit your user to U.S. time zones:
+```erbruby
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones %>
+```
+
 
 
 ### A summary of do’s and don'ts with time zones
