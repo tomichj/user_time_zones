@@ -37,6 +37,10 @@ Run the install generator:
 rails generate user_time_zones:install
 ```
 
+Optional flags:
+* -j append javascript require to your `application.js`
+* --model specify a different user model
+
 Apply the migration the generator created:
 ```sh
 rails db:migrate
@@ -47,7 +51,7 @@ The install generator will:
 * Insert `include UserTimeZones::User` into your `User` model.
 * Insert `include UserTimeZones::Controller` into your `ApplicationController`.
 
-Include the javascript to calculate a new user's timezone in your `application.js`:
+Then add the javascript require to your `application.js` (or use -j flag with install generator):
 ```javascript
 //= require user_time_zones
 ```
