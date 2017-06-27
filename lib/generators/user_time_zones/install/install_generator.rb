@@ -9,11 +9,18 @@ module UserTimeZones
       include UserTimeZone::Generators::Helpers
 
       source_root File.expand_path('../templates', __FILE__)
+
       class_option :model,
                    optional: true,
                    type: :string,
                    banner: 'model',
                    desc: "Specify the model class name if you will use anything other than 'User'"
+
+      class_option :javascript,
+                   type: :boolean,
+                   aliases: '-j',
+                   default: false,
+                   desc: 'Install javascript "require" into application.js'
 
       def initialize(*)
         super
@@ -45,7 +52,12 @@ module UserTimeZones
         )
       end
 
-
+      def inject_javascript
+        javascript = File.join('app', 'assets', 'javascripts', 'application.js')
+        if options.javascript && File.exist?(javascript)
+          append_to_file 'app/assets/javascripts/application.js', '//= require user_time_zones'
+        end
+      end
 
       private
 
