@@ -1,6 +1,10 @@
 # User Time Zones Changelog
 
 
+## [0.1.3] - September 29, 2017
+
+No code changes, just additional permissions fixes to files in the gem build. 
+
 ## [0.1.2] - September 29, 2017
 
 No code changes, just permissions fixes to files in the gem build. 
@@ -15,6 +19,6 @@ Added javascript support to install generator.
 
 Initial release
 
-
+[0.1.3]: https://github.com/tomichj/user_time_zones/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/tomichj/user_time_zones/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/tomichj/user_time_zones/compare/v0.1.0...v0.1.1
