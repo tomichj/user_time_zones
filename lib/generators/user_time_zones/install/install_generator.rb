@@ -53,10 +53,8 @@ module UserTimeZones
       end
 
       def inject_javascript
-        javascript = File.join('app', 'assets', 'javascripts', 'application.js')
-        if options.javascript && File.exist?(javascript)
-          append_to_file 'app/assets/javascripts/application.js', '//= require user_time_zones'
-        end
+        append_to_file 'app/assets/javascripts/application.js',
+                       "//= require user_time_zones\n"
       end
 
       private

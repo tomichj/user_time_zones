@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.rdoc_options = ['--charset=UTF-8']
 
   # probably reduce to railtie or ...
-  spec.add_dependency 'rails', '>= 5.0', '< 5.3'
+  spec.add_dependency 'rails', '>= 5.0'
 
   spec.add_development_dependency 'bundler', '~> 1.14'
   spec.add_development_dependency 'rake', '~> 10.0'
